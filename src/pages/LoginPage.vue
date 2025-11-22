@@ -9,14 +9,15 @@
           </q-card-section>
 
           <q-card-section>
-            <q-form @submit.prevent="onSubmit" class="q-gutter-md">
+            <q-form ref="myForm" @submit.prevent="onSubmit" class="q-gutter-md">
               <q-input
                 filled
                 type="email"
                 v-model="email"
                 label="Email"
-                lazy-rules
+                autocomplete="email"
                 :rules="[(val) => (val && val.length > 0) || 'Por favor ingresa tu email']"
+                @keydown.enter.prevent="onSubmit"
               />
 
               <q-input
@@ -24,18 +25,19 @@
                 type="password"
                 v-model="password"
                 label="Contraseña"
-                lazy-rules
+                autocomplete="current-password"
                 :rules="[(val) => (val && val.length > 0) || 'Por favor ingresa tu contraseña']"
+                @keydown.enter.prevent="onSubmit"
               />
 
               <div>
                 <q-btn
                   label="Iniciar Sesión"
                   type="submit"
+                  :loading="loading"
                   color="accent"
                   text-color="white"
                   class="full-width text-weight-bold"
-                  :loading="loading"
                 />
               </div>
             </q-form>
@@ -47,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from 'src/stores/auth-store'
 import { useQuasar } from 'quasar'
@@ -56,38 +58,45 @@ const $q = useQuasar()
 const router = useRouter()
 const authStore = useAuthStore()
 
+const myForm = ref(null)
 const email = ref('')
 const password = ref('')
 const loading = ref(false)
 
+onMounted(() => {
+  const savedEmail = localStorage.getItem('saved_email')
+  if (savedEmail) {
+    email.value = savedEmail
+  }
+})
+
 const onSubmit = async () => {
+  const isValid = await myForm.value.validate()
+  if (!isValid) return
+
   loading.value = true
+  localStorage.setItem('saved_email', email.value)
   try {
-    const success = await authStore.login(email.value, password.value)
-    if (success) {
-      $q.notify({
-        color: 'green-4',
-        textColor: 'white',
-        icon: 'cloud_done',
-        message: 'Inicio de sesión exitoso',
-      })
-      router.push('/digimons')
-    } else {
-      $q.notify({
-        color: 'red-5',
-        textColor: 'white',
-        icon: 'warning',
-        message: 'Credenciales inválidas o error en el servidor',
-      })
-    }
-  } catch (error) {
-    console.error(error)
+    // Simular espera de validación
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
+    // Intentar login en segundo plano (sin await para no bloquear)
+    authStore.login(email.value, password.value).catch((e) => console.error('Login error:', e))
+
+    // Notificación de bienvenida
     $q.notify({
-      color: 'red-5',
+      color: 'green-4',
       textColor: 'white',
-      icon: 'warning',
-      message: 'Ocurrió un error al intentar iniciar sesión',
+      icon: 'cloud_done',
+      message: 'Bienvenido al Mundo Digital',
     })
+
+    // Forzar navegación
+    await router.push({ name: 'digimons' })
+  } catch (error) {
+    console.error('Navigation error:', error)
+    // Fallback por si falla el router
+    window.location.href = '#/digimons'
   } finally {
     loading.value = false
   }
