@@ -7,7 +7,7 @@
         <q-toolbar-title> Digimon App </q-toolbar-title>
 
         <div v-if="authStore.isAuthenticated" class="q-mr-md">
-          Hola, {{ authStore.user?.username }}
+          Hola, {{ authStore.user?.firstName || authStore.user?.username }}
         </div>
         <q-btn
           v-if="authStore.isAuthenticated"

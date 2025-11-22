@@ -9,10 +9,11 @@
           </q-card-section>
 
           <q-card-section>
-            <q-form @submit="onSubmit" class="q-gutter-md">
+            <q-form @submit.prevent="onSubmit" class="q-gutter-md">
               <q-input
                 filled
-                v-model="username"
+                type="email"
+                v-model="email"
                 label="Email"
                 lazy-rules
                 :rules="[(val) => (val && val.length > 0) || 'Por favor ingresa tu email']"
@@ -34,6 +35,7 @@
                   color="accent"
                   text-color="white"
                   class="full-width text-weight-bold"
+                  :loading="loading"
                 />
               </div>
             </q-form>
@@ -54,26 +56,40 @@ const $q = useQuasar()
 const router = useRouter()
 const authStore = useAuthStore()
 
-const username = ref('')
+const email = ref('')
 const password = ref('')
+const loading = ref(false)
 
-const onSubmit = () => {
-  const success = authStore.login(username.value, password.value)
-  if (success) {
-    $q.notify({
-      color: 'green-4',
-      textColor: 'white',
-      icon: 'cloud_done',
-      message: 'Inicio de sesión exitoso',
-    })
-    router.push('/')
-  } else {
+const onSubmit = async () => {
+  loading.value = true
+  try {
+    const success = await authStore.login(email.value, password.value)
+    if (success) {
+      $q.notify({
+        color: 'green-4',
+        textColor: 'white',
+        icon: 'cloud_done',
+        message: 'Inicio de sesión exitoso',
+      })
+      router.push('/')
+    } else {
+      $q.notify({
+        color: 'red-5',
+        textColor: 'white',
+        icon: 'warning',
+        message: 'Credenciales inválidas o error en el servidor',
+      })
+    }
+  } catch (error) {
+    console.error(error)
     $q.notify({
       color: 'red-5',
       textColor: 'white',
       icon: 'warning',
-      message: 'Credenciales inválidas',
+      message: 'Ocurrió un error al intentar iniciar sesión',
     })
+  } finally {
+    loading.value = false
   }
 }
 </script>
