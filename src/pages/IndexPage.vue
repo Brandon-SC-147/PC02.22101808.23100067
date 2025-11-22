@@ -1,6 +1,6 @@
 <template>
-  <q-page class="q-pa-md">
-    <div class="text-h4 q-mb-md text-center text-primary">Catálogo Digimon</div>
+  <q-page class="q-pa-md bg-grey-2">
+    <div class="text-h4 q-mb-md text-center text-primary text-weight-bolder">CATÁLOGO DIGIMON</div>
 
     <DigimonFilter @filter="handleFilter" />
 

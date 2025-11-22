@@ -13,9 +13,9 @@
               <q-input
                 filled
                 v-model="username"
-                label="Niño Elegido (Usuario)"
+                label="Email"
                 lazy-rules
-                :rules="[(val) => (val && val.length > 0) || 'Por favor ingresa tu usuario']"
+                :rules="[(val) => (val && val.length > 0) || 'Por favor ingresa tu email']"
               />
 
               <q-input
