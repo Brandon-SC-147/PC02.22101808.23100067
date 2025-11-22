@@ -22,7 +22,7 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> Enlaces Digitales </q-item-label>
 
         <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
@@ -50,46 +50,34 @@ const handleLogout = () => {
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
+    title: 'Sitio Oficial',
+    caption: 'digimon.net',
     icon: 'public',
-    link: 'https://facebook.quasar.dev',
+    link: 'https://digimon.net/',
   },
   {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    title: 'Digimon Wiki',
+    caption: 'digimon.fandom.com',
+    icon: 'menu_book',
+    link: 'https://digimon.fandom.com/',
+  },
+  {
+    title: 'Juego de Cartas',
+    caption: 'world.digimoncard.com',
+    icon: 'style',
+    link: 'https://world.digimoncard.com/',
+  },
+  {
+    title: 'Toei Animation',
+    caption: 'toei-animation.com',
+    icon: 'movie',
+    link: 'https://www.toei-animation.com/',
+  },
+  {
+    title: 'Bandai Namco',
+    caption: 'bandainamcoent.com',
+    icon: 'games',
+    link: 'https://www.bandainamcoent.com/',
   },
 ]
 

@@ -8,7 +8,11 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', redirect: '/digimons' },
-      { path: 'digimons', component: () => import('pages/DigimonList.vue') },
+      {
+        path: 'digimons',
+        name: 'digimons',
+        component: () => import('pages/DigimonList.vue'),
+      },
       { path: 'digimons/:name', component: () => import('pages/DigimonDetail.vue') },
     ],
   },
