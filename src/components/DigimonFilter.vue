@@ -1,40 +1,55 @@
 <template>
-  <q-card class="bg-primary text-white q-mb-md shadow-3">
+  <q-card
+    class="bg-dark text-white shadow-10"
+    style="border: 2px solid #003399; border-radius: 10px"
+  >
     <q-card-section>
-      <div class="text-h6 q-mb-sm text-center text-secondary text-weight-bold">
-        BUSCADOR DIGIMON
+      <div
+        class="text-h6 q-mb-md text-center text-secondary text-weight-bolder"
+        style="letter-spacing: 1px"
+      >
+        <q-icon name="radar" class="q-mr-sm" />
+        DIGIVICE RADAR
       </div>
-      <div class="row q-col-gutter-md">
-        <div class="col-12 col-sm-6">
+
+      <div class="q-gutter-y-md">
+        <div>
+          <div class="text-caption text-grey-4 q-mb-xs">Identificar Digimon:</div>
           <q-input
             filled
-            bg-color="white"
-            color="accent"
+            dark
+            bg-color="grey-9"
+            color="secondary"
             v-model="searchName"
-            label="Buscar por nombre"
+            placeholder="Nombre..."
             dense
             clearable
             @update:model-value="emitFilter"
+            class="digi-input"
           >
             <template v-slot:prepend>
-              <q-icon name="search" color="primary" />
+              <q-icon name="search" color="secondary" />
             </template>
           </q-input>
         </div>
-        <div class="col-12 col-sm-6">
+
+        <div>
+          <div class="text-caption text-grey-4 q-mb-xs">Nivel de Poder:</div>
           <q-select
             filled
-            bg-color="white"
-            color="accent"
+            dark
+            bg-color="grey-9"
+            color="secondary"
             v-model="searchLevel"
             :options="levelOptions"
-            label="Filtrar por nivel"
+            label="Seleccionar Nivel"
             dense
             clearable
             @update:model-value="emitFilter"
+            class="digi-input"
           >
             <template v-slot:prepend>
-              <q-icon name="filter_list" color="primary" />
+              <q-icon name="signal_cellular_alt" color="secondary" />
             </template>
           </q-select>
         </div>

@@ -71,7 +71,7 @@ const onSubmit = async () => {
         icon: 'cloud_done',
         message: 'Inicio de sesión exitoso',
       })
-      router.push('/')
+      router.push('/digimons')
     } else {
       $q.notify({
         color: 'red-5',
