@@ -24,6 +24,16 @@
           <q-chip dense size="sm" color="dark" text-color="green-4" icon="shield"> Defense </q-chip>
         </div>
       </div>
+
+      <q-btn
+        flat
+        dense
+        class="q-mt-sm full-width"
+        color="secondary"
+        label="Ver Datos"
+        icon-right="arrow_forward"
+        :to="'/digimons/' + digimon.name"
+      />
     </q-card-section>
   </q-card>
 </template>

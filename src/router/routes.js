@@ -9,6 +9,7 @@ const routes = [
     children: [
       { path: '', redirect: '/digimons' },
       { path: 'digimons', component: () => import('pages/DigimonList.vue') },
+      { path: 'digimons/:name', component: () => import('pages/DigimonDetail.vue') },
     ],
   },
 
