@@ -1,31 +1,46 @@
 <template>
-  <div class="row q-col-gutter-md q-mb-md">
-    <div class="col-12 col-sm-6">
-      <q-input
-        outlined
-        v-model="searchName"
-        label="Buscar por nombre"
-        dense
-        clearable
-        @update:model-value="emitFilter"
-      >
-        <template v-slot:append>
-          <q-icon name="search" />
-        </template>
-      </q-input>
-    </div>
-    <div class="col-12 col-sm-6">
-      <q-select
-        outlined
-        v-model="searchLevel"
-        :options="levelOptions"
-        label="Filtrar por nivel"
-        dense
-        clearable
-        @update:model-value="emitFilter"
-      />
-    </div>
-  </div>
+  <q-card class="bg-primary text-white q-mb-md shadow-3">
+    <q-card-section>
+      <div class="text-h6 q-mb-sm text-center text-secondary text-weight-bold">
+        BUSCADOR DIGIMON
+      </div>
+      <div class="row q-col-gutter-md">
+        <div class="col-12 col-sm-6">
+          <q-input
+            filled
+            bg-color="white"
+            color="accent"
+            v-model="searchName"
+            label="Buscar por nombre"
+            dense
+            clearable
+            @update:model-value="emitFilter"
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" color="primary" />
+            </template>
+          </q-input>
+        </div>
+        <div class="col-12 col-sm-6">
+          <q-select
+            filled
+            bg-color="white"
+            color="accent"
+            v-model="searchLevel"
+            :options="levelOptions"
+            label="Filtrar por nivel"
+            dense
+            clearable
+            @update:model-value="emitFilter"
+          >
+            <template v-slot:prepend>
+              <q-icon name="filter_list" color="primary" />
+            </template>
+          </q-select>
+        </div>
+      </div>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script setup>
