@@ -4,9 +4,19 @@
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title> Digimon App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div v-if="authStore.isAuthenticated" class="q-mr-md">
+          Hola, {{ authStore.user?.username }}
+        </div>
+        <q-btn
+          v-if="authStore.isAuthenticated"
+          flat
+          dense
+          icon="logout"
+          label="Salir"
+          @click="handleLogout"
+        />
       </q-toolbar>
     </q-header>
 
@@ -26,7 +36,17 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from 'src/stores/auth-store'
 import EssentialLink from 'components/EssentialLink.vue'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+const handleLogout = () => {
+  authStore.logout()
+  router.push('/login')
+}
 
 const linksList = [
   {
